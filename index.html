@@ -44,6 +44,34 @@
         .focus\:ring-accent:focus { --tw-ring-color: #00a99d; }
         .form-input { border-width: 1px; border-color: #d1d5db; border-radius: 0.5rem; transition: all 0.2s ease-in-out; width: 100%; padding: 0.75rem 1rem; }
         .form-input:focus { outline: none; box-shadow: 0 0 0 2px rgba(0, 169, 157, 0.4); border-color: #00a99d; }
+        .step-guide h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #003366;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #00a99d;
+        }
+        .step-guide p, .step-guide li {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .step-guide ul {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            space-y: 0.5rem;
+        }
+         .step-guide code {
+            background-color: #e2e8f0;
+            color: #2d3748;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', Courier, monospace;
+        }
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -51,7 +79,7 @@
     <div class="bg-white min-h-screen">
         <header class="bg-[#003366] shadow-lg">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center space-x-4">
-                 <img src="https://storage.googleapis.com/maker-me/uploads/uploaded_1719278964726_Logo%20Educa%2B.jpg" alt="Logo da Educa+" class="h-16 w-auto rounded-md">
+                 <img src="https://storage.googleapis.com/maker-me/uploads/uploaded_1719278964726_Logo%20Educa%2B.jpg" alt="Logo da Educa+" class="h-16 w-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/150x64/003366/FFFFFF?text=Educa%2B';">
                  <div>
                     <h1 class="text-white text-2xl md:text-3xl font-bold">Fundamentos e Aplicação da Bioética</h1>
                     <p class="text-teal-300 mt-1 text-sm">Uma Ferramenta Interativa para Profissionais de Saúde</p>
@@ -79,17 +107,18 @@
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const sections = [
-            { id: 'fundamentos', title: 'Fundamentos da Ética', icon: ' ️' },
+            { id: 'fundamentos', title: 'Fundamentos da Ética', icon: '🏛️' },
             { id: 'comites', title: 'Comitês de Bioética', icon: '👥' },
             { id: 'ferramenta', title: 'Ferramenta IDEA de Decisão', icon: '💡' },
             { id: 'literatura', title: 'Literatura Recomendada', icon: '🔖' },
-            { id: 'contato', title: 'Contato', icon: '✉️' }
+            { id: 'contato', title: 'Contato', icon: '✉️' },
+            { id: 'hospedagem', title: 'Hospedagem', icon: '☁️' }
         ];
 
         const tabButtonsContainer = document.getElementById('tab-buttons');
         const tabContentsContainer = document.getElementById('tab-contents');
         
-        const footerHTML = `<footer class="text-center text-sm text-gray-500 border-t border-gray-200 pt-4 mt-12">Desenvolvido com base no "IDEA: Quadro de Tomada de Decisão Ética" do Trillium Health Centre.</footer>`;
+        const footerHTML = `<footer class="text-center text-sm text-gray-500 border-t border-gray-200 pt-4 mt-12">Desenvolvido por @Educa+ 2025.</footer>`;
 
         const contentHTML = {
             'fundamentos': `
@@ -139,7 +168,7 @@
             'contato': `
                 <section id="contato-content">
                     <div class="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-xl text-center">
-                        <img src="https://storage.googleapis.com/maker-me/uploads/uploaded_1719278964726_Logo%20Educa%2B.jpg" alt="Logo da Educa+" class="h-24 w-auto mx-auto mb-6">
+                        <img src="https://storage.googleapis.com/maker-me/uploads/uploaded_1719278964726_Logo%20Educa%2B.jpg" alt="Logo da Educa+" class="h-24 w-auto mx-auto mb-6" onerror="this.onerror=null;this.src='https://placehold.co/220x96/003366/FFFFFF?text=Educa%2B';">
                         <h1 class="text-3xl sm:text-4xl font-bold text-primary tracking-tight mb-4">
                             Fale com Nossos Especialistas
                         </h1>
@@ -150,7 +179,7 @@
                         <div class="text-left max-w-3xl mx-auto space-y-6 mb-10">
                             <h2 class="text-2xl font-semibold text-primary border-b-2 border-accent pb-2">Como Podemos Ajudar</h2>
                             <p class="text-gray-700">
-                                Na Educa+, nossa missão é capacitar instituições de saúde a atingirem a excelência clínica e operacional. Integramos tecnologia com metodologias de qualidade (Lean Healthcare, PDSA, outros) para gerar impacto mensurável.
+                               Na Educa+, nossa missão é capacitar instituições de saúde a atingirem a excelência clínica e operacional. Integramos tecnologia com metodologias de qualidade (Lean Healthcare, PDSA, outros) para gerar impacto mensurável.
                             </p>
                              <ul class="space-y-4">
                                 <li class="flex items-start"><div class="flex-shrink-0"><i class="fas fa-chart-line text-accent text-xl mr-4 mt-1"></i></div><div><strong class="text-gray-800">Otimizar Fluxos e Processos:</strong> Reduzimos desperdícios e tempos de espera, melhorando a eficiência na alocação de recursos e no fluxo de pacientes.</div></li>
@@ -177,6 +206,66 @@
 
                     </div>
                 </section>
+            `,
+            'hospedagem': `
+                <section id="hospedagem-content" class="bg-white p-8 rounded-lg shadow-lg">
+                    <h2 class="section-title text-3xl font-bold text-center mb-8">Como Hospedar sua Aplicação Gratuitamente</h2>
+                    <div class="max-w-3xl mx-auto step-guide">
+                        <p class="text-lg text-center text-gray-600 mb-8">Esta aplicação é um único ficheiro HTML autónomo. Isto torna-a muito fácil de colocar online gratuitamente. Aqui está um guia passo a passo usando o GitHub e a Netlify, duas plataformas populares e confiáveis.</p>
+
+                        <h3>Passo 1: Guardar o Código</h3>
+                        <p>Primeiro, precisa de guardar todo o código desta aplicação num ficheiro.</p>
+                        <ul>
+                            <li>Crie um novo ficheiro no seu computador e nomeie-o como <code>index.html</code>.</li>
+                            <li>Copie <strong>todo</strong> o código que está nesta janela e cole-o no seu ficheiro <code>index.html</code>.</li>
+                            <li>Guarde o ficheiro.</li>
+                        </ul>
+
+                        <h3>Passo 2: Criar uma Conta no GitHub</h3>
+                        <p>O GitHub é um serviço que permite guardar e gerir o seu código. Pense nele como uma "drive" para programadores.</p>
+                        <ul>
+                            <li>Se ainda não tiver uma conta, vá a <a href="https://github.com/join" target="_blank" class="link-article">github.com/join</a> e crie uma conta gratuita.</li>
+                        </ul>
+
+                        <h3>Passo 3: Criar um Repositório e Fazer o Upload do Ficheiro</h3>
+                        <p>Um "repositório" é como uma pasta para o seu projeto no GitHub.</p>
+                        <ul>
+                            <li>Após iniciar sessão, clique no ícone "+" no canto superior direito e selecione "New repository".</li>
+                            <li>Dê um nome ao seu repositório (por exemplo, <code>app-bioetica</code>).</li>
+                            <li>Pode deixá-lo "Public".</li>
+                            <li>Clique em "Create repository".</li>
+                            <li>Na página seguinte do seu repositório, clique em "uploading an existing file".</li>
+                            <li>Arraste e solte o seu ficheiro <code>index.html</code> na área indicada ou clique para o selecionar do seu computador.</li>
+                            <li>Clique em "Commit changes" para guardar o ficheiro.</li>
+                        </ul>
+
+                        <h3>Passo 4: Criar uma Conta na Netlify</h3>
+                        <p>A Netlify é um serviço que pega no código do seu GitHub e o publica na web.</p>
+                        <ul>
+                            <li>Vá a <a href="https://app.netlify.com/signup" target="_blank" class="link-article">app.netlify.com/signup</a>.</li>
+                            <li>A forma mais fácil é inscrever-se usando a sua conta do GitHub. Clique no botão do GitHub e autorize a ligação.</li>
+                        </ul>
+
+                        <h3>Passo 5: Publicar o seu Site</h3>
+                        <p>Agora vamos ligar a Netlify ao seu repositório do GitHub.</p>
+                        <ul>
+                            <li>Após iniciar sessão na Netlify, será direcionado para o seu painel de controlo.</li>
+                            <li>Clique em "Add new site" e depois escolha "Import an existing project".</li>
+                            <li>Clique no botão do GitHub.</li>
+                            <li>Ser-lhe-á pedido para autorizar a Netlify a aceder aos seus repositórios. Instale a aplicação da Netlify na sua conta do GitHub.</li>
+                            <li>Escolha o repositório que acabou de criar (<code>app-bioetica</code>).</li>
+                            <li>A Netlify detetará automaticamente que é um site simples. Não precisa de alterar nenhuma configuração. Apenas role para baixo e clique em "Deploy site".</li>
+                        </ul>
+
+                        <h3>Passo 6: Aceda ao seu Site!</h3>
+                        <p>É tudo! A Netlify demorará alguns segundos a publicar o seu site.</p>
+                        <ul>
+                            <li>Assim que estiver pronto, a Netlify dar-lhe-á um link público gratuito (algo como <code>nome-aleatorio-12345.netlify.app</code>). Pode clicar nele para ver a sua aplicação online.</li>
+                            <li>Se quiser, pode personalizar este link em "Site settings" > "Domain management" > "Options" > "Edit site name".</li>
+                        </ul>
+                        <p class="mt-6 font-semibold text-primary">Agora tem a sua aplicação a funcionar num link público que pode partilhar com qualquer pessoa!</p>
+                    </div>
+                </section>
             `
         };
         
@@ -193,7 +282,7 @@
             contentDiv.className = 'tab-content';
             
             let finalHTML = contentHTML[section.id];
-            if (section.id !== 'contato') {
+            if (section.id !== 'contato' && section.id !== 'hospedagem') {
                 finalHTML += footerHTML;
             }
             contentDiv.innerHTML = finalHTML;
