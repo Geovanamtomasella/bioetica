@@ -34,7 +34,7 @@
         .option-block.selected { border-color: #00a99d; background-color: #f0fdfa; }
         .list-circle { list-style-type: circle; }
         
-        /* Styles from Contact Page */
+        /* Styles from Contact and Comites pages */
         .text-primary { color: #003366; }
         .bg-primary { background-color: #003366; }
         .hover\:bg-primary-dark:hover { background-color: #002244; }
@@ -42,6 +42,20 @@
         .bg-accent { background-color: #00a99d; }
         .hover\:bg-accent-dark:hover { background-color: #008a7e; }
         .border-accent { border-color: #00a99d; }
+
+        /* Styles for expandable examples */
+        .implementation-step { cursor: pointer; transition: all 0.3s ease-in-out; }
+        .implementation-step.open { background-color: #f0fdfa; border-left-color: #00a99d; }
+        .example-content { display: none; overflow: hidden; transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; max-height: 0; }
+        .implementation-step.open .example-content { display: block; max-height: 500px; padding-top: 1rem; padding-bottom: 1rem; }
+
+        /* Quiz styles */
+        .question-block { background-color: #ffffff; border-left: 4px solid #003366; }
+        .option-label { transition: background-color 0.2s ease-in-out; }
+        input[type="radio"]:checked + .option-label { background-color: #e6fffa; border-color: #00a99d; }
+        .correct-answer { background-color: #c6f6d5 !important; border-color: #38a169 !important; }
+        .incorrect-answer { background-color: #fed7d7 !important; border-color: #e53e3e !important; }
+        .explanation-box { background-color: #f0f4f8; border-left: 4px solid #00a99d; }
     </style>
 </head>
 <body class="antialiased text-gray-800">
@@ -80,6 +94,7 @@
             { id: 'fundamentos', title: 'Fundamentos', icon: '<i class="fas fa-landmark fa-fw text-xl"></i>' },
             { id: 'comites', title: 'Comitês', icon: '<i class="fas fa-users fa-fw text-xl"></i>' },
             { id: 'ferramenta', title: 'Ferramenta IDEA', icon: '<i class="fas fa-lightbulb fa-fw text-xl"></i>' },
+            { id: 'quiz', title: 'Avaliar Conhecimento', icon: '<i class="fas fa-graduation-cap fa-fw text-xl"></i>' },
             { id: 'literatura', title: 'Literatura', icon: '<i class="fas fa-bookmark fa-fw text-xl"></i>' },
             { id: 'contato', title: 'Contato', icon: '<i class="fas fa-envelope fa-fw text-xl"></i>' }
         ];
@@ -97,10 +112,25 @@
                         <div class="card bg-white p-6 rounded-lg shadow-md"><h3 class="font-bold text-xl text-[#003366] mb-2">Ética</h3><p>É o estudo sistemático dos princípios e valores que guiam a conduta humana. Na saúde, a ética questiona "O que devemos fazer e por quê?", promovendo a prática reflexiva para tomar decisões "certas" ou "boas" em situações complexas. É uma reflexão crítica sobre a moral vigente.</p><p class="text-xs italic text-gray-500 mt-3 border-t pt-2">Ref.: PESSINI, Leo; BARCHIFONTAINE, Christian de Paul de. **Bioética: do principialismo à busca de uma perspectiva latino-americana**. Edições Loyola, 2017.</p></div>
                         <div class="card bg-white p-6 rounded-lg shadow-md"><h3 class="font-bold text-xl text-[#003366] mb-2">Moral</h3><p>Refere-se aos costumes, regras e tabus de uma sociedade ou grupo. Enquanto a moral dita as regras de conduta estabelecidas ("o que se faz"), a ética é a reflexão sobre o porquê de se fazer, especialmente quando as regras entram em conflito ou se mostram insuficientes.</p><p class="text-xs italic text-gray-500 mt-3 border-t pt-2">Ref.: CORTINA, Adela; MARTÍNEZ, Emilio. **Ética**. Edições Loyola, 2016.</p></div>
                     </div>
-                    <h2 class="section-title text-3xl font-bold text-center mb-8">Ética em Saúde e suas Implicações</h2>
-                    <div class="bg-white p-6 rounded-lg shadow-md mb-12"><p class="mb-4">A Ética em Saúde, ou Bioética, é a aplicação dos princípios éticos aos desafios do cuidado, da pesquisa e das políticas de saúde. Ela vai além dos códigos profissionais, exigindo uma análise crítica constante em um ambiente de rápidas inovações tecnológicas e crescente complexidade social.</p><ul class="list-disc list-inside text-sm space-y-2 text-gray-700"><li><strong>Relação Profissional-Paciente:</strong> Fundamenta a confiança, o respeito à autonomia, a comunicação honesta (veracidade) e a proteção da privacidade (confidencialidade).</li><li><strong>Tomada de Decisão Clínica:</strong> Oferece ferramentas, como os princípios da bioética, para analisar e resolver dilemas sobre início e fim de vida, alocação de recursos escassos e conflitos de valores.</li><li><strong>Políticas de Saúde:</strong> Influencia a criação de leis e diretrizes sobre saúde pública, pesquisa com seres humanos e acesso equitativo aos serviços, buscando o bem comum e a justiça social.</li></ul></div>
-                    <h2 class="section-title text-3xl font-bold text-center mb-8">Princípios da Bioética em Saúde</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12"><div class="card bg-teal-50 p-6 rounded-lg border border-teal-200"><h4 class="font-bold text-lg text-[#00a99d] mb-2">Autonomia</h4><p>Respeito à capacidade do paciente de tomar decisões informadas sobre seu próprio tratamento. <strong>Exemplo:</strong> Garantir que o paciente compreenda os riscos e benefícios de uma cirurgia antes de assinar o termo de consentimento.</p></div><div class="card bg-blue-50 p-6 rounded-lg border border-blue-200"><h4 class="font-bold text-lg text-[#003366] mb-2">Beneficência</h4><p>O dever de agir sempre no melhor interesse do paciente, promovendo seu bem-estar. <strong>Exemplo:</strong> Indicar um tratamento que, com base nas evidências, oferece a maior chance de cura para a doença do paciente.</p></div><div class="card bg-teal-50 p-6 rounded-lg border border-teal-200"><h4 class="font-bold text-lg text-[#00a99d] mb-2">Não Maleficência</h4><p>O princípio de "primeiro, não causar dano". Obriga a evitar qualquer dano previsível ao paciente. <strong>Exemplo:</strong> Suspender um medicamento ao perceber que ele está a causar uma reação adversa grave.</p></div><div class="card bg-blue-50 p-6 rounded-lg border border-blue-200"><h4 class="font-bold text-lg text-[#003366] mb-2">Justiça</h4><p>Distribuição justa e equitativa dos recursos de saúde, tratando casos semelhantes de forma semelhante. <strong>Exemplo:</strong> Criar uma fila de transplantes baseada em critérios clínicos objetivos, sem privilégios sociais ou financeiros.</p></div></div>
+                    <h2 class="section-title text-3xl font-bold text-center mb-8">Abordagens Éticas na Saúde</h2>
+                     <div class="bg-white p-6 rounded-lg shadow-md mb-12 space-y-6">
+                        <div>
+                            <h3 class="font-bold text-xl text-primary mb-2">Principialismo</h3>
+                            <p class="mb-4 text-gray-700">O principialismo, popularizado por Beauchamp e Childress, é a abordagem mais influente na bioética ocidental. Propõe quatro princípios como um guia para a tomada de decisão:</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <div class="card bg-teal-50 p-4 rounded-lg border border-teal-200"><h4 class="font-bold text-lg text-accent mb-2">Autonomia</h4><p>Respeito à capacidade do paciente de tomar decisões informadas sobre seu próprio tratamento.</p></div>
+                                <div class="card bg-blue-50 p-4 rounded-lg border border-blue-200"><h4 class="font-bold text-lg text-primary mb-2">Beneficência</h4><p>O dever de agir sempre no melhor interesse do paciente, promovendo seu bem-estar.</p></div>
+                                <div class="card bg-teal-50 p-4 rounded-lg border border-teal-200"><h4 class="font-bold text-lg text-accent mb-2">Não Maleficência</h4><p>O princípio de "primeiro, não causar dano". Obriga a evitar qualquer dano previsível ao paciente.</p></div>
+                                <div class="card bg-blue-50 p-4 rounded-lg border border-blue-200"><h4 class="font-bold text-lg text-primary mb-2">Justiça</h4><p>Distribuição justa e equitativa dos recursos de saúde, tratando casos semelhantes de forma semelhante.</p></div>
+                            </div>
+                        </div>
+                        <div class="pt-6 border-t border-gray-200">
+                             <h3 class="font-bold text-xl text-primary mb-2">Utilitarismo</h3>
+                            <p class="text-gray-700">O utilitarismo é uma teoria consequencialista que defende que a ação moralmente correta é aquela que maximiza a felicidade ou o bem-estar para o maior número de pessoas. Na saúde, é frequentemente invocado em decisões de saúde pública.</p>
+                            <p class="mt-2 text-gray-700"><strong>Exemplo:</strong> Campanhas de vacinação em massa são justificadas pelo utilitarismo, pois o pequeno risco para alguns indivíduos é superado pelo benefício coletivo massivo de erradicar uma doença.</p>
+                            <p class="text-xs italic text-gray-500 mt-3 border-t pt-2">Ref.: MILL, John Stuart. **Utilitarismo**. São Paulo: Martins Fontes, 2000.</p>
+                        </div>
+                    </div>
                     <h2 class="section-title text-3xl font-bold text-center mb-8">Comitês de Ética: Papéis e Responsabilidades</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12"><div class="card bg-white p-6 rounded-lg shadow-md"><h3 class="font-bold text-xl text-[#003366] mb-2">Comitê de Ética em Pesquisa (CEP)</h3><p class="text-gray-700 mb-3 text-sm">Órgão colegiado que defende os interesses dos participantes da pesquisa. Analisa e aprova protocolos de pesquisa com seres humanos, garantindo que os aspetos éticos sejam respeitados.</p><ul class="list-disc list-inside text-sm space-y-2"><li><strong>Resolução CNS 466/2012:</strong> Principal marco regulatório para pesquisas com seres humanos no Brasil, exigindo análise pelo sistema CEP/CONEP.</li><li><strong>Resolução CNS 510/2016:</strong> Especifica as diretrizes para pesquisas na área de Ciências Humanas e Sociais.</li></ul></div><div class="card bg-white p-6 rounded-lg shadow-md"><h3 class="font-bold text-xl text-[#003366] mb-2">Comissão de Ética Médica (CEM)</h3><p class="text-gray-700 mb-3 text-sm">Possui funções educativas, consultivas e fiscalizadoras do exercício ético da medicina na instituição. É um braço do Conselho Regional de Medicina (CRM) local.</p><ul class="list-disc list-inside text-sm space-y-2"><li><strong>Resolução CFM nº 2.152/2016:</strong> Regula as competências das CEMs. Elas devem orientar, fiscalizar e instaurar sindicâncias, encaminhando os processos ao CRM para julgamento.</li></ul></div><div class="card bg-white p-6 rounded-lg shadow-md"><h3 class="font-bold text-xl text-[#003366] mb-2">Comissão de Ética de Enfermagem (CEE)</h3><p class="text-gray-700 mb-3 text-sm">Representa o Conselho Regional de Enfermagem (COREN), com função educativa, consultiva e de conciliação. Zela pelo exercício ético de enfermeiros, técnicos e auxiliares.</p><ul class="list-disc list-inside text-sm space-y-2"><li><strong>Resolução COFEN nº 564/2017:</strong> Aprova o Código de Ética dos Profissionais de Enfermagem, que norteia a atuação da CEE.</li><li><strong>Resolução COFEN nº 593/2018:</strong> Norma que cria e regulamenta o funcionamento das CEEs nas instituições de saúde.</li></ul></div><div class="card bg-white p-6 rounded-lg shadow-md"><h3 class="font-bold text-xl text-[#003366] mb-2">Comitê de Bioética Clínica (CBC)</h3><p class="text-gray-700 mb-3 text-sm">Órgão multidisciplinar, consultivo e educativo que auxilia na resolução de dilemas éticos da prática clínica que não configuram, necessariamente, uma infração.</p><ul class="list-disc list-inside text-sm space-y-1"><li>Analisa casos complexos (fim de vida, conflitos de valores).</li><li>Desenvolve políticas e diretrizes éticas institucionais.</li><li>Não possui caráter fiscalizatório ou punitivo.</li></ul></div></div>
                     <h2 class="section-title text-3xl font-bold text-center mb-8">Implicações Legais e Jurídicas Atuais</h2>
@@ -109,12 +139,62 @@
             `,
             'comites': `
                 <section id="comites-content">
-                    <h2 class="section-title text-3xl font-bold text-center mb-8">Comitês de Bioética: Da Implementação à Avaliação de Sua Eficácia</h2>
-                    <div class="bg-white p-6 rounded-lg shadow-md mb-8 text-gray-700 text-sm leading-relaxed"><p class="mb-4">A crescente complexidade dos cuidados em saúde, marcada por avanços tecnológicos e dilemas éticos cada vez mais presentes, tornou os Comitês de Bioética (CBs) estruturas essenciais em hospitais e instituições de saúde. Estes órgãos multidisciplinares atuam como espaços de reflexão, consulta e educação, visando aprimorar a qualidade da assistência e garantir o respeito à dignidade humana em momentos de vulnerabilidade.</p><p>Este artigo, baseado em publicações científicas e diretrizes dos últimos 10 anos, apresenta um guia sobre como implementar um comitê de bioética e, crucialmente, como avaliar sua eficácia para garantir que cumpra seus objetivos de forma significativa.</p></div>
-                    <h3 class="text-2xl font-bold text-[#003366] mb-4 mt-8">Parte 1: Como Implementar um Comitê de Bioética</h3>
-                    <div class="bg-white p-6 rounded-lg shadow-md mb-8 text-gray-700 text-sm leading-relaxed space-y-4"><p>A criação de um Comitê de Bioética é um processo que demanda planejamento e o engajamento da instituição. Embora no Brasil não exista uma lei federal que obrigue a criação desses comitês, há recomendações de órgãos como o Conselho Federal de Medicina (CFM) e a Sociedade Brasileira de Bioética (SBB) que incentivam sua formação.</p><div><h4 class="text-lg font-semibold text-[#00a99d]">Passo 1: Sensibilização e Apoio Institucional</h4><p>O primeiro passo é obter o apoio da direção da instituição. É fundamental apresentar a importância do comitê para a qualificação da assistência, a segurança do paciente e o suporte aos profissionais de saúde na tomada de decisões difíceis, o que pode reduzir o estresse moral e o esgotamento profissional.</p></div><div><h4 class="text-lg font-semibold text-[#00a99d]">Passo 2: Definição da Missão, Funções e Escopo</h4><p>Antes de sua formação, é preciso definir claramente os objetivos do comitê. As três funções clássicas de um Comitê de Bioética são:</p><ul class="list-disc list-inside mt-2 space-y-2 pl-4"><li><strong>Consultiva:</strong> Análise de casos clínicos que apresentem conflitos éticos, oferecendo recomendações não-coercitivas para a equipe de saúde, pacientes e familiares. Exemplos incluem dilemas sobre fim de vida, adequação terapêutica e consentimento informado em situações complexas.</li><li><strong>Educativa:</strong> Promoção de atividades de formação contínua para os profissionais da instituição sobre temas de bioética, como seminários, cursos e discussões de casos, a fim de aprimorar a sensibilidade ética da comunidade hospitalar.</li><li><strong>Normativa:</strong> Auxílio na elaboração e revisão de políticas e diretrizes institucionais relacionadas a questões éticas, como protocolos de cuidados paliativos, diretivas antecipadas de vontade e alocação de recursos.</li></ul></div><div><h4 class="text-lg font-semibold text-[#00a99d]">Passo 3: Composição Multidisciplinar</h4><p>A força de um comitê de bioética reside na diversidade de seus membros. A composição deve ser heterogênea para garantir uma análise plural e abrangente dos dilemas. Recomenda-se a inclusão de:</p><ul class="list-disc list-inside mt-2 space-y-2 pl-4"><li><strong>Profissionais da saúde:</strong> Médicos, enfermeiros, fisioterapeutas, psicólogos, assistentes sociais.</li><li><strong>Profissionais de outras áreas:</strong> Advogados, filósofos, teólogos ou religiosos.</li><li><strong>Representantes da administração do hospital.</strong></li><li><strong>Representantes da comunidade ou de usuários do serviço de saúde.</strong></li></ul><p class="mt-2">O número de membros pode variar, mas deve ser suficiente para garantir a diversidade e a operacionalidade. A participação deve ser voluntária e os membros devem receber capacitação em bioética.</p></div><div><h4 class="text-lg font-semibold text-[#00a99d]">Passo 4: Elaboração do Regimento Interno</h4><p>O comitê deve operar com base em um regimento interno claro, que deve ser aprovado pelas instâncias competentes da instituição. Este documento deve detalhar:</p><ul class="list-disc list-inside mt-2 space-y-2 pl-4"><li>A missão e os objetivos do comitê.</li><li>A composição, o processo de escolha e o mandato dos membros.</li><li>As atribuições do coordenador e dos demais membros.</li><li>A periodicidade e o quórum das reuniões.</li><li>O fluxo para solicitação de consultorias e o prazo para emissão de pareceres.</li><li>As normas para garantir a confidencialidade das informações.</li></ul></div><p class="text-xs italic text-gray-500 mt-4 border-t pt-2">Ref.: CONSELHO FEDERAL DE MEDICINA. **Resolução CFM nº 2.152, de 30 de setembro de 2016.** Dispõe sobre os Comitês de Bioética. Brasília, DF: Diário Oficial da União, 1 nov. 2016. Seção 1, p. 118.<br>Ref.: LEPARGNEUR, H. A implantação de um comitê de bioética em um hospital. **Revista Bioética**, v. 1, n. 2, 1993.</p></div>
-                    <h3 class="text-2xl font-bold text-[#003366] mb-4 mt-8">Parte 2: Como Avaliar a Eficácia de um Comitê de Bioética</h3>
-                    <div class="bg-white p-6 rounded-lg shadow-md mb-8 text-gray-700 text-sm leading-relaxed space-y-4"><p>A avaliação da eficácia de um comitê de bioética é um desafio, pois seu impacto muitas vezes é qualitativo e difícil de mensurar. Uma revisão sistemática publicada em 2020 por Crico e outros na revista BMC Medical Ethics revelou que não existem ferramentas padronizadas para medir a eficácia dos comitês, mas identificou abordagens comuns e úteis. A avaliação não deve visar apenas justificar a existência do comitê, mas sim identificar pontos fortes e áreas para melhoria.</p><p>A avaliação pode ser estruturada em torno de indicadores de estrutura, processo e resultado.</p><div><h4 class="text-lg font-semibold text-[#00a99d]">1. Indicadores de Estrutura</h4><p>Avaliam se o comitê possui os recursos necessários para funcionar adequadamente.</p><ul class="list-disc list-inside mt-2 space-y-2 pl-4"><li><strong>Composição:</strong> O comitê mantém sua natureza multidisciplinar? A diversidade de profissões e visões está sendo garantida?</li><li><strong>Capacitação:</strong> Os membros recebem formação inicial e continuada em bioética? Qual a carga horária de treinamento por membro?</li><li><strong>Recursos:</strong> O comitê dispõe de recursos materiais e logísticos (sala de reuniões, acesso a bases de dados, etc.) para suas atividades?</li></ul></div><div><h4 class="text-lg font-semibold text-[#00a99d]">2. Indicadores de Processo</h4><p>Medem as atividades realizadas pelo comitê.</p><ul class="list-disc list-inside mt-2 space-y-2 pl-4"><li><strong>Atividade Consultiva:</strong> Número de casos analisados por período (mês/ano).</li><li>Origem das solicitações (quais setores ou categorias profissionais mais demandam o comitê?).</li><li>Tempo médio entre a solicitação e a resposta/parecer do comitê.</li><li>Principais dilemas éticos abordados.</li><li><strong>Atividade Educativa:</strong> Número de eventos educativos realizados (seminários, workshops).</li><li>Número de participantes e avaliação da satisfação com os eventos.</li><li><strong>Atividade Normativa:</strong> Número de políticas ou protocolos institucionais criados ou revisados com a participação do comitê.</li></ul></div><div><h4 class="text-lg font-semibold text-[#00a99d]">3. Indicadores de Resultado e Impacto</h4><p>Buscam medir os efeitos das ações do comitê na instituição. Esta é a dimensão mais complexa da avaliação.</p><ul class="list-disc list-inside mt-2 space-y-2 pl-4"><li><strong>Satisfação dos Usuários:</strong> Este é o indicador de eficácia mais comum e importante. A avaliação deve ser feita por meio de questionários anônimos aplicados a quem solicitou uma consultoria (médicos, enfermeiros, familiares). Questões pertinentes incluem:<ul class="list-circle list-inside ml-5"><li>O parecer do comitê ajudou a clarificar os aspectos éticos do caso?</li><li>A recomendação foi útil para o processo de tomada de decisão?</li><li>O processo de consulta foi respeitoso e inclusivo?</li><li>Você recomendaria o serviço de consultoria a um colega?</li></ul></li><li><strong>Impacto na Prática Clínica:</strong><ul class="list-circle list-inside ml-5"><li>Análise de prontuários para verificar se as recomendações do comitê foram documentadas e consideradas na evolução do cuidado.</li><li>Redução percebida de conflitos entre equipes ou entre equipe e familiares após a intervenção do comitê.</li><li>Melhora na documentação de decisões sobre cuidados de fim de vida e diretivas antecipadas.</li></ul></li><li><strong>Impacto no Clima Ético Institucional:</strong><ul class="list-circle list-inside ml-5"><li>Pesquisas periódicas com os profissionais de saúde para medir a "consciência ética" ou o "clima moral" da instituição.</li><li>Aumento da procura voluntária pelo comitê como um recurso de apoio, e não como uma instância fiscalizadora.</li></ul></li></ul></div><p class="mt-4 border-t pt-4">Conclui-se que a implementação e a manutenção de um Comitê de Bioética são processos dinâmicos. A criação de uma estrutura sólida, com missões claras e apoio institucional, é o primeiro passo. Contudo, é a avaliação contínua de suas atividades e, principalmente, de seu impacto na qualidade do cuidado e na satisfação de seus usuários, que garantirá sua relevância e efetividade no complexo ambiente da saúde contemporânea.</p><p class="text-xs italic text-gray-500 mt-4 border-t pt-2">Ref.: CRICO, C. et al. How is the effectiveness of clinical ethics committees’ evaluation measured? A systematic review. **BMC Medical Ethics**, v. 21, n. 8, 2020.<br>Ref.: ZOBOLI, E. L. C. P. Bioética clínica: avaliação de um modelo de consultoria para o Hospital das Clínicas da FMUSP. **Revista da Associação Médica Brasileira**, v. 49, n. 1, p. 78-83, 2003.</p></div>
+                    <h2 class="section-title text-3xl font-bold text-center mb-8">Comitês de Bioética: Da Implementação à Avaliação</h2>
+                    <div class="bg-white p-8 rounded-lg shadow-md mb-8 text-gray-700 text-sm leading-relaxed">
+                        <p>A crescente complexidade dos cuidados em saúde tornou os Comitês de Bioética (CBs) estruturas essenciais. Estes órgãos multidisciplinares atuam como espaços de reflexão e consulta, visando aprimorar a qualidade da assistência e garantir o respeito à dignidade humana.</p>
+                    </div>
+
+                    <div class="mb-12">
+                        <h3 class="text-2xl font-bold text-primary mb-6 text-center">Como Implementar um Comitê de Bioética</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="implementation-steps">
+                            <div class="implementation-step bg-white p-6 rounded-lg shadow-lg border-l-4 border-transparent">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0"><i class="fas fa-handshake text-accent text-3xl"></i></div>
+                                    <div><h4 class="font-semibold text-lg text-primary mb-1">Passo 1: Apoio Institucional</h4><p class="text-gray-600 text-sm">Obtenha o apoio da direção, apresentando a importância do comitê para a qualificação da assistência e segurança do paciente.</p></div>
+                                </div>
+                                <div class="example-content"><p class="text-xs italic text-gray-600 bg-gray-100 p-3 rounded-md"><strong>Exemplo Prático:</strong> A Dra. Ana, chefe da UTI, e o enfermeiro-chefe Carlos preparam uma apresentação para a diretoria do hospital. Eles usam dados internos sobre o tempo de internação em casos de conflito familiar e pesquisas sobre o *burnout* da equipe. A apresentação destaca como um Comitê de Bioética poderia reduzir custos associados a litígios, melhorar a satisfação do paciente (indicador de qualidade) e apoiar os profissionais, resultando numa aprovação para um projeto-piloto de 6 meses.</p></div>
+                            </div>
+                             <div class="implementation-step bg-white p-6 rounded-lg shadow-lg border-l-4 border-transparent">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0"><i class="fas fa-bullseye text-accent text-3xl"></i></div>
+                                    <div><h4 class="font-semibold text-lg text-primary mb-1">Passo 2: Missão e Funções</h4><p class="text-gray-600 text-sm">Defina claramente os objetivos: consultoria, educação e auxílio na criação de normas internas.</p></div>
+                                </div>
+                                <div class="example-content"><p class="text-xs italic text-gray-600 bg-gray-100 p-3 rounded-md"><strong>Exemplo Prático:</strong> A equipe do projeto-piloto, liderada pela Dra. Ana, define a missão: "Promover o cuidado centrado no paciente através da deliberação ética, educação e desenvolvimento de políticas". As funções são detalhadas: <strong>Consultoria:</strong> Pareceres em 48h para casos urgentes. <strong>Educação:</strong> Um workshop mensal sobre temas como "Diretivas Antecipadas de Vontade". <strong>Normativa:</strong> Revisar o protocolo de cuidados paliativos do hospital no primeiro semestre.</p></div>
+                            </div>
+                             <div class="implementation-step bg-white p-6 rounded-lg shadow-lg border-l-4 border-transparent">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0"><i class="fas fa-users text-accent text-3xl"></i></div>
+                                    <div><h4 class="font-semibold text-lg text-primary mb-1">Passo 3: Composição Multidisciplinar</h4><p class="text-gray-600 text-sm">Inclua profissionais da saúde, advogados, filósofos, representantes da administração e da comunidade para garantir uma visão plural.</p></div>
+                                </div>
+                                <div class="example-content"><p class="text-xs italic text-gray-600 bg-gray-100 p-3 rounded-md"><strong>Exemplo Prático:</strong> O hospital envia um convite aberto para voluntários. A seleção busca diversidade: Dra. Ana (UTI), Enf. Carlos (chefe), um médico da emergência, uma psicóloga, um assistente social, o advogado do hospital, um capelão e um representante dos pacientes (indicado pela associação de bairro). O grupo inicial tem 8 membros.</p></div>
+                            </div>
+                             <div class="implementation-step bg-white p-6 rounded-lg shadow-lg border-l-4 border-transparent">
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0"><i class="fas fa-file-signature text-accent text-3xl"></i></div>
+                                    <div><h4 class="font-semibold text-lg text-primary mb-1">Passo 4: Regimento Interno</h4><p class="text-gray-600 text-sm">Crie regras claras sobre a missão, composição, atribuições e fluxo de trabalho do comitê.</p></div>
+                                </div>
+                                <div class="example-content"><p class="text-xs italic text-gray-600 bg-gray-100 p-3 rounded-md"><strong>Exemplo Prático:</strong> O grupo elabora um documento de 5 páginas. Nele, definem que as reuniões serão quinzenais, com quórum de 50%+1. As solicitações de consulta podem ser feitas por qualquer profissional via um formulário online confidencial. Os pareceres são registados no prontuário eletrónico, identificados como "Recomendação do Comitê de Bioética", e são de natureza consultiva, não impositiva. A confidencialidade é reforçada, com todos os membros a assinar um termo de sigilo.</p></div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div>
+                        <h3 class="text-2xl font-bold text-primary mb-6 text-center">Como Avaliar a Eficácia de um Comitê</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                           <div class="bg-white p-6 rounded-lg shadow-lg"><div class="flex items-center mb-3"><i class="fas fa-sitemap text-primary text-2xl mr-3"></i><h4 class="font-semibold text-lg text-primary">Estrutura</h4></div><ul class="list-disc list-inside text-sm space-y-2 text-gray-600"><li>Composição multidisciplinar garantida?</li><li>Membros recebem capacitação contínua?</li><li>Recursos logísticos adequados?</li></ul></div>
+                           <div class="bg-white p-6 rounded-lg shadow-lg"><div class="flex items-center mb-3"><i class="fas fa-tasks text-primary text-2xl mr-3"></i><h4 class="font-semibold text-lg text-primary">Processo</h4></div><ul class="list-disc list-inside text-sm space-y-2 text-gray-600"><li>Número e origem das consultorias.</li><li>Tempo de resposta para os pareceres.</li><li>Número de atividades educativas.</li><li>Políticas criadas ou revisadas.</li></ul></div>
+                           <div class="bg-white p-6 rounded-lg shadow-lg"><div class="flex items-center mb-3"><i class="fas fa-chart-line text-primary text-2xl mr-3"></i><h4 class="font-semibold text-lg text-primary">Resultados e Impacto</h4></div><ul class="list-disc list-inside text-sm space-y-2 text-gray-600"><li>Nível de satisfação dos solicitantes.</li><li>Redução de conflitos entre equipes.</li><li>Melhora na documentação de decisões.</li><li>Aumento da "consciência ética" na instituição.</li></ul></div>
+                        </div>
+                    </div>
+                     <div class="mt-12 pt-8 border-t border-gray-200">
+                        <h3 class="text-2xl font-bold text-primary mb-4">Referências Teóricas</h3>
+                        <div class="bg-white p-6 rounded-lg shadow-md text-sm space-y-4 text-gray-700">
+                            <p>CONSELHO FEDERAL DE MEDICINA. <strong>Resolução CFM nº 2.152, de 30 de setembro de 2016</strong>. Dispõe sobre os Comitês de Bioética. Diário Oficial da União, Brasília, DF, 1 nov. 2016. Seção 1, p. 118.</p>
+                            <p>CRICO, C. et al. How is the effectiveness of clinical ethics committees’ evaluation measured? A systematic review. <strong>BMC Medical Ethics</strong>, v. 21, n. 8, 2020.</p>
+                            <p>LEPARGNEUR, H. A implantação de um comitê de bioética em um hospital. <strong>Revista Bioética</strong>, v. 1, n. 2, 1993.</p>
+                            <p>ZOBOLI, E. L. C. P. Bioética clínica: avaliação de um modelo de consultoria para o Hospital das Clínicas da FMUSP. <strong>Revista da Associação Médica Brasileira</strong>, São Paulo, v. 49, n. 1, p. 78-83, 2003.</p>
+                        </div>
+                    </div>
                 </section>
             `,
             'literatura':`
@@ -162,6 +242,24 @@
                     </div>
                 </div>
             `,
+            'quiz': `
+                <section id="quiz-content" class="max-w-4xl mx-auto">
+                    <h2 class="section-title text-3xl font-bold text-center mb-2">Avalie seu Conhecimento em Bioética</h2>
+                    <p class="text-center text-gray-600 mb-8">Teste seus conhecimentos com 15 questões de alto nível sobre dilemas éticos e legais na saúde.</p>
+                    <div id="quiz-container" class="space-y-6"></div>
+                    <div id="quiz-results" class="hidden mt-8">
+                        <div class="p-8 bg-white rounded-lg shadow-xl mb-6 text-center">
+                            <h3 id="quiz-score" class="text-4xl font-bold text-primary mb-4"></h3>
+                            <p id="quiz-feedback" class="text-lg text-gray-700 mb-6"></p>
+                            <button id="retry-quiz-btn" class="btn-accent py-2 px-6 rounded-lg font-semibold">Tentar Novamente</button>
+                        </div>
+                        <div id="quiz-review-container" class="space-y-6"></div>
+                    </div>
+                    <div class="mt-8 text-center">
+                         <button id="submit-quiz-btn" class="btn-primary py-3 px-8 rounded-lg text-lg font-semibold">Finalizar Teste</button>
+                    </div>
+                </section>
+            `,
             'contato': `
                 <section id="contato-content">
                     <div class="max-w-4xl mx-auto bg-white p-8 sm:p-12 rounded-2xl shadow-xl text-center">
@@ -206,59 +304,218 @@
             `
         };
         
-        // 1. Generate all tab buttons and content containers
-        sections.forEach(section => {
-            const button = document.createElement('button');
-            button.className = 'tab-button text-gray-500 hover:text-[#003366] py-4 px-3 text-sm font-medium whitespace-nowrap flex items-center space-x-2';
-            const iconSpan = `<span class="icon-wrapper w-6 text-center">${section.icon}</span>`;
-            button.innerHTML = `${iconSpan} <span>${section.title}</span>`;
-            button.dataset.tab = section.id;
-            tabButtonsContainer.appendChild(button);
+        // --- Main Initialization Function ---
+        function init() {
+            // 1. Generate all tab buttons and content containers
+            sections.forEach(section => {
+                const button = document.createElement('button');
+                button.className = 'tab-button text-gray-500 hover:text-[#003366] py-4 px-3 text-sm font-medium whitespace-nowrap flex items-center space-x-2';
+                const iconSpan = `<span class="icon-wrapper w-6 text-center">${section.icon}</span>`;
+                button.innerHTML = `${iconSpan} <span>${section.title}</span>`;
+                button.dataset.tab = section.id;
+                tabButtonsContainer.appendChild(button);
 
-            const contentDiv = document.createElement('div');
-            contentDiv.id = section.id;
-            contentDiv.className = 'tab-content';
-            
-            let finalHTML = contentHTML[section.id];
-            if (section.id !== 'contato') {
-                finalHTML += footerHTML;
-            }
-            contentDiv.innerHTML = finalHTML;
-            tabContentsContainer.appendChild(contentDiv);
-        });
-
-        const tabButtons = document.querySelectorAll('.tab-button');
-        const tabContents = document.querySelectorAll('.tab-content');
-
-        // 2. Tab switching logic
-        function switchTab(tabId) {
-            tabContents.forEach(content => content.classList.add('hidden'));
-            tabButtons.forEach(button => {
-                button.classList.remove('active');
-                button.querySelector('.icon-wrapper').classList.remove('text-accent');
+                const contentDiv = document.createElement('div');
+                contentDiv.id = section.id;
+                contentDiv.className = 'tab-content hidden';
+                
+                let finalHTML = contentHTML[section.id];
+                if (section.id !== 'contato' && section.id !== 'quiz') {
+                    finalHTML += footerHTML;
+                }
+                contentDiv.innerHTML = finalHTML;
+                tabContentsContainer.appendChild(contentDiv);
             });
-            
-            const activeContent = document.getElementById(tabId);
-            if(activeContent) activeContent.classList.remove('hidden');
 
-            const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
-            if(activeButton) {
-                activeButton.classList.add('active');
-                activeButton.querySelector('.icon-wrapper').classList.add('text-accent');
-            }
-            
-            if (tabId === 'ferramenta' && !document.getElementById('idea-wizard')?.dataset.initialized) {
-                 initializeIDEA();
-            }
+            // 2. Attach all event listeners now that HTML is in the DOM
+            initTabs();
+            initComitesTab();
+            initializeIDEA();
+            initializeQuizTab();
+
+            // 3. Set the initial active tab
+            switchTab('fundamentos');
         }
 
-        tabButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                switchTab(button.dataset.tab);
-            });
-        });
+        // --- Event Listener Initializers ---
         
-        // 4. IDEA Tool initialization logic
+        function initTabs() {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    switchTab(button.dataset.tab);
+                });
+            });
+        }
+        
+        function initComitesTab() {
+            const comitesContent = document.getElementById('comites');
+            if (comitesContent) {
+                comitesContent.addEventListener('click', function(event) {
+                    const step = event.target.closest('.implementation-step');
+                    if (!step) return;
+
+                    const allSteps = comitesContent.querySelectorAll('.implementation-step');
+                    allSteps.forEach(s => {
+                        if (s !== step) s.classList.remove('open');
+                    });
+                    step.classList.toggle('open');
+                });
+            }
+        }
+        
+        function initializeQuizTab() {
+            const quizContent = document.getElementById('quiz-content');
+            if (!quizContent) return;
+
+            const quizContainer = quizContent.querySelector('#quiz-container');
+            const submitButton = quizContent.querySelector('#submit-quiz-btn');
+            const resultsContainer = quizContent.querySelector('#quiz-results');
+            const scoreElement = quizContent.querySelector('#quiz-score');
+            const feedbackElement = quizContent.querySelector('#quiz-feedback');
+            const retryButton = quizContent.querySelector('#retry-quiz-btn');
+            const reviewContainer = quizContent.querySelector('#quiz-review-container');
+
+            if (!quizContainer || !submitButton || !resultsContainer || !retryButton || !reviewContainer) return;
+            
+            const questions = [
+                {
+                    question: "Um paciente em estado terminal, plenamente capaz, recusa um tratamento de suporte vital (ex: ventilação mecânica), mesmo sabendo que a recusa resultará em morte. A família exige que o tratamento seja instituído. Sob a ótica do Código de Ética Médica brasileiro e da jurisprudência predominante, qual é a conduta eticamente mais defensável?",
+                    options: [
+                        "a) Instituir o tratamento à força, priorizando o princípio da beneficência e o valor da vida.",
+                        "b) Acatar a decisão da família, que legalmente representa o paciente em situações de conflito.",
+                        "c) Acatar a recusa do paciente, registando-a detalhadamente no prontuário, com base no princípio da autonomia.",
+                        "d) Solicitar autorização judicial para suspender o tratamento, transferindo a responsabilidade da decisão.",
+                        "e) Iniciar o tratamento temporariamente e convocar o comitê de bioética para mediar o conflito."
+                    ],
+                    answer: 2,
+                    explanation: "A autonomia do paciente capaz prevalece sobre a vontade da família e a obrigação de prolongar a vida a todo custo (distanásia). A Resolução CFM 1.805/2006 e o Código de Ética Médica amparam a recusa de tratamentos extraordinários por pacientes terminais, desde que a decisão seja lúcida e informada."
+                },
+                {
+                    question: "A utilização de dados de um biobanco para uma nova pesquisa, não prevista no consentimento informado original, é eticamente permissível quando:",
+                    options: [
+                        "a) É impossível recontactar os doadores, mas a pesquisa tem grande potencial de benefício público.",
+                        "b) Os dados são completamente anonimizados, impedindo qualquer chance de re-identificação do doador.",
+                        "c) O consentimento original era do tipo 'amplo' ou 'genérico' e o novo projeto é aprovado pelo sistema CEP/CONEP.",
+                        "d) Os pesquisadores assinam um termo de confidencialidade, mesmo que os dados não sejam anonimizados.",
+                        "e) A nova pesquisa é financiada por uma instituição pública de fomento à ciência."
+                    ],
+                    answer: 2,
+                    explanation: "A Resolução CNS 466/12 e guias internacionais permitem o uso secundário de dados mediante um consentimento amplo, que autoriza o uso em futuras pesquisas dentro de uma linha de investigação. No entanto, é imprescindível que cada novo projeto seja submetido e aprovado pelo Comitê de Ética em Pesquisa (CEP), que avaliará os riscos e a pertinência do novo uso."
+                },
+                {
+                    question: "O conceito de 'duplo efeito' na bioética se aplica a qual das seguintes situações?",
+                    options: [
+                        "a) Um cirurgião realiza um procedimento arriscado que pode salvar ou piorar a condição do paciente.",
+                        "b) A administração de altas doses de morfina para aliviar a dor intensa de um paciente terminal, que pode, como efeito secundário e não intencional, abreviar a vida.",
+                        "c) Oferecer um placebo a um grupo de controle em um ensaio clínico, sabendo que eles não receberão o tratamento ativo.",
+                        "d) Um médico quebra o sigilo de um paciente para proteger uma terceira pessoa de um dano iminente.",
+                        "e) Realizar uma cirurgia estética que melhora a autoestima do paciente, mas acarreta riscos físicos."
+                    ],
+                    answer: 1,
+                    explanation: "O princípio do duplo efeito justifica uma ação que tem uma consequência boa (alívio da dor) e uma má (abreviação da vida), desde que: 1) a ação em si seja boa ou neutra; 2) a intenção seja apenas o efeito bom; 3) o efeito mau não seja o meio para alcançar o bom; e 4) haja uma razão proporcionalmente grave para permitir o efeito mau."
+                },
+                {
+                    question: "A diferença fundamental entre um Comitê de Ética em Pesquisa (CEP) e um Comitê de Bioética Clínica (CBC) ou Hospitalar é:",
+                    options: [
+                        "a) O CEP é obrigatório por lei no Brasil para pesquisas com seres humanos, enquanto o CBC é, na maioria dos casos, opcional.",
+                        "b) O CEP é formado apenas por médicos, enquanto o CBC é obrigatoriamente multidisciplinar.",
+                        "c) As decisões do CBC são legalmente vinculativas para a equipe, enquanto as do CEP são apenas recomendações.",
+                        "d) O CEP analisa casos clínicos retrospectivos e o CBC analisa projetos de pesquisa futuros.",
+                        "e) O CEP foca na proteção dos participantes da pesquisa, enquanto a única função do CBC é educar a equipe do hospital."
+                    ],
+                    answer: 0,
+                    explanation: "O sistema CEP/CONEP é uma exigência legal e normativa para toda pesquisa envolvendo seres humanos no Brasil (Res. CNS 466/12). Já os Comitês de Bioética Clínica, embora fortemente recomendados para qualificar a assistência, não são, em geral, uma obrigação legal para o funcionamento da instituição, sendo sua criação uma iniciativa de boas práticas."
+                },
+                 {
+                    question: "Na alocação de um único órgão para transplante, o critério de 'justiça social' ou 'equidade', em oposição a uma visão puramente utilitarista, tenderia a favorecer:",
+                    options: [
+                         "a) O paciente com a maior probabilidade de sobrevida pós-transplante para maximizar o benefício do órgão.",
+                         "b) O paciente que está há mais tempo na fila de espera, respeitando a ordem cronológica.",
+                         "c) O paciente mais jovem, para lhe dar a oportunidade de viver mais anos.",
+                         "d) O paciente que é cidadão local ou que contribuiu mais para o sistema de saúde.",
+                         "e) O paciente que, embora com menor chance de sobrevida, pertence a um grupo historicamente desfavorecido."
+                    ],
+                    answer: 1,
+                    explanation: "Enquanto o utilitarismo foca em maximizar o resultado (anos de vida), a equidade e a justiça formal buscam tratar todos de forma igual. O critério de fila, baseado na antiguidade, é um mecanismo para evitar discriminação por idade, condição social ou prognóstico, garantindo que todos tenham uma chance justa, embora critérios de compatibilidade e urgência também sejam essenciais e ponderados."
+                }
+            ];
+
+            function renderQuiz() {
+                quizContainer.innerHTML = '';
+                questions.forEach((q, index) => {
+                    const questionElement = document.createElement('div');
+                    questionElement.className = 'question-block p-6 rounded-lg shadow-md mb-6';
+                    let optionsHTML = '';
+                    q.options.forEach((option, i) => {
+                        optionsHTML += `
+                            <div class="relative flex items-center">
+                                <input type="radio" id="q${index}_option${i}" name="question${index}" value="${i}" class="absolute opacity-0 w-0 h-0">
+                                <label for="q${index}_option${i}" class="option-label w-full p-3 my-2 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-100">${option}</label>
+                            </div>
+                        `;
+                    });
+                    questionElement.innerHTML = `<p class="font-semibold text-sm mb-4 text-primary">${index + 1}. ${q.question}</p><div class="space-y-2">${optionsHTML}</div>`;
+                    quizContainer.appendChild(questionElement);
+                });
+            }
+
+            function showResults() {
+                let score = 0;
+                let reviewHTML = '';
+            
+                questions.forEach((q, index) => {
+                    const selectedInput = document.querySelector(`input[name="question${index}"]:checked`);
+                    const selectedValue = selectedInput ? parseInt(selectedInput.value) : -1;
+                    
+                    if (selectedValue === q.answer) {
+                        score++;
+                    }
+
+                    reviewHTML += `<div class="question-block p-6 rounded-lg shadow-md mb-6 text-left">`;
+                    reviewHTML += `<p class="font-semibold text-sm mb-4 text-primary">${index + 1}. ${q.question}</p>`;
+                    
+                    q.options.forEach((option, i) => {
+                        let labelClass = 'option-label w-full p-3 my-2 border-2 border-gray-200 rounded-lg';
+                        if (i === q.answer) {
+                            labelClass += ' correct-answer';
+                        }
+                        if (selectedValue === i && selectedValue !== q.answer) {
+                            labelClass += ' incorrect-answer';
+                        }
+                        reviewHTML += `<div class="${labelClass}">${option}</div>`;
+                    });
+
+                    reviewHTML += `<div class="explanation-box p-4 mt-4 rounded-md text-sm"><strong class="text-primary">Justificativa:</strong> ${q.explanation}</div>`;
+                    reviewHTML += `</div>`;
+                });
+
+                scoreElement.textContent = `Sua Pontuação: ${score} de ${questions.length}`;
+                let feedback = '';
+                if(score / questions.length >= 0.8) feedback = "Excelente! Seu conhecimento sobre as nuances da bioética é impressionante.";
+                else if (score / questions.length >= 0.5) feedback = "Bom trabalho! Você tem uma base sólida, mas há alguns tópicos complexos para revisar.";
+                else feedback = "É um bom começo. Este teste é desafiador. Continue a explorar os materiais para aprofundar seu conhecimento.";
+                
+                feedbackElement.textContent = feedback;
+                quizContainer.classList.add('hidden');
+                submitButton.classList.add('hidden');
+                resultsContainer.classList.remove('hidden');
+                reviewContainer.innerHTML = reviewHTML;
+            }
+
+            submitButton.addEventListener('click', showResults);
+
+            retryButton.addEventListener('click', () => {
+                resultsContainer.classList.add('hidden');
+                reviewContainer.innerHTML = '';
+                quizContainer.classList.remove('hidden');
+                submitButton.classList.remove('hidden');
+                renderQuiz();
+            });
+
+            renderQuiz();
+        }
+        
         function initializeIDEA() {
             const wizard = document.getElementById('idea-wizard');
             if (!wizard || wizard.dataset.initialized) return;
@@ -281,9 +538,7 @@
             const generatePdfBtn = document.getElementById('generate-pdf-btn');
             const copySummaryBtn = document.getElementById('copy-summary-btn');
             
-            // --- Guard Clauses for essential elements ---
             if (!prevBtn || !nextBtn || !addParticipantBtn || !participantsTbody) {
-                console.error("Erro: Componentes essenciais do wizard não foram encontrados. A funcionalidade pode estar comprometida.");
                 return;
             }
             
@@ -309,7 +564,7 @@
             // --- Helper Functions ---
             
             function updateWizard() {
-                document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('#wizard-steps-container .step-content').forEach(el => el.classList.remove('active'));
                 const stepEl = document.getElementById(`step-${currentStep}`);
                 if (stepEl) stepEl.classList.add('active');
 
@@ -421,11 +676,13 @@
 
             function generateSummary() {
                 const summaryContent = document.getElementById('summary-content');
+                if(!summaryContent) return;
                 const data = getSummaryData();
                 summaryContent.innerHTML = `<h4 class="font-bold text-xl text-[#003366]">Fatos Identificados</h4><p><strong>Indicações Médicas:</strong><br>${data.fatosMedicos.replace(/\n/g, '<br>')}</p><p><strong>Preferências do Paciente:</strong><br>${data.fatosPaciente.replace(/\n/g, '<br>')}</p><p><strong>Evidência:</strong><br>${data.fatosEvidencia.replace(/\n/g, '<br>')}</p><p><strong>Contexto:</strong><br>${data.fatosContexto.replace(/\n/g, '<br>')}</p><h4 class="font-bold text-xl text-[#003366] mt-4">Princípios Relevantes</h4><p><strong>Princípios Selecionados:</strong> ${data.selectedPrinciples}</p><p><strong>Justificativa:</strong><br>${data.principiosJustificativa.replace(/\n/g, '<br>')}</p><h4 class="font-bold text-xl text-[#003366] mt-4">Opções Exploradas</h4>${data.optionsText}<h4 class="font-bold text-xl text-[#003366] mt-4">Ação</h4>${data.recommendedActionsText}<p class="font-semibold mt-2">Plano de Implementação:</p>${data.implementationPlansText || '<p class="text-sm">Nenhum plano de implementação adicionado.</p>'}<p class="font-semibold mt-2">Plano de Avaliação:</p>${evaluationPlanTbody && evaluationPlanTbody.rows.length > 0 ? data.evaluationPlanText : '<p class="text-sm">Nenhuma etapa de avaliação adicionada.</p>'}`;
             }
 
             // --- Initial Setup & Event Listeners ---
+            if(nextBtn) nextBtn.addEventListener('click', nextStepHandler);
             if (caseSelectionContainer) { caseStudies.forEach(caseStudy => { const button = document.createElement('button'); button.className = "case-button w-full text-left p-4 bg-white rounded-lg shadow hover:bg-teal-50"; button.dataset.caseId = caseStudy.id; button.innerHTML = `<h4 class="font-bold text-[#003366]">${caseStudy.title}</h4><p class="text-sm text-gray-600 mt-1">${caseStudy.desc}</p>`; button.addEventListener('click', () => { document.querySelectorAll('.case-button').forEach(btn => btn.classList.remove('selected')); button.classList.add('selected'); document.getElementById('other-case-textarea').classList.add('hidden'); selectedCase = caseStudy; }); caseSelectionContainer.appendChild(button); }); }
             if(otherCaseContainer){ const otherCaseButton = document.createElement('button'); otherCaseButton.id = 'other-case-btn'; otherCaseButton.className = 'case-button w-full text-left p-4 bg-white rounded-lg shadow hover:bg-teal-50'; otherCaseButton.innerHTML = `<h4 class="font-bold text-[#003366]">Outro Caso</h4><p class="text-sm text-gray-600 mt-1">Descreva seu próprio caso clínico para análise.</p>`; const otherCaseTextarea = document.createElement('textarea'); otherCaseTextarea.id = 'other-case-textarea'; otherCaseTextarea.className = 'hidden mt-2 block w-full rounded-md border-gray-300 shadow-sm h-28'; otherCaseTextarea.placeholder = 'Descreva aqui o caso clínico que você deseja analisar...'; otherCaseButton.addEventListener('click', () => { document.querySelectorAll('.case-button').forEach(btn => btn.classList.remove('selected')); otherCaseButton.classList.add('selected'); otherCaseTextarea.classList.remove('hidden'); selectedCase = 'other'; }); otherCaseContainer.appendChild(otherCaseButton); otherCaseContainer.appendChild(otherCaseTextarea); }
             if(principlesGrid){ principles.forEach(p => { const container = document.createElement('div'); container.className = "principle-container flex flex-col text-center p-3 border rounded-lg bg-white shadow-sm transition-all duration-200 cursor-pointer"; const btn = document.createElement('button'); btn.textContent = p.name; btn.className = "principle-btn w-full p-2 font-semibold text-gray-800 rounded-md bg-gray-100 transition-colors duration-200"; btn.type = 'button'; const desc = document.createElement('p'); desc.textContent = p.desc; desc.className = "text-xs text-gray-600 mt-2 flex-grow"; const cardContent = document.createElement('div'); cardContent.className = "flex flex-col h-full"; cardContent.appendChild(btn); cardContent.appendChild(desc); container.appendChild(cardContent); const toggleSelection = () => { btn.classList.toggle('selected'); container.classList.toggle('selected-container'); }; container.addEventListener('click', toggleSelection); principlesGrid.appendChild(container); }); }
@@ -437,18 +694,80 @@
             
             prevBtn.addEventListener('click', () => { if (currentStep > 1) { currentStep--; updateWizard(); } });
             
-            if(generatePdfBtn) { generatePdfBtn.addEventListener('click', () => { const pdfContent = document.createElement('div'); pdfContent.style.padding = '2rem'; pdfContent.style.fontFamily = 'Inter, sans-serif'; const title = document.createElement('h1'); title.style.fontSize = '24px'; title.style.fontWeight = 'bold'; title.style.color = '#003366'; title.style.marginBottom = '1.5rem'; title.textContent = 'Relatório de Análise Ética - Ferramenta IDEA'; pdfContent.appendChild(title); const discussionDate = document.getElementById('discussion-date').value; if (discussionDate) { const dateEl = document.createElement('p'); dateEl.innerHTML = `<strong>Data da Discussão:</strong> ${new Date(discussionDate).toLocaleDateString('pt-BR', {timeZone: 'UTC'})}`; pdfContent.appendChild(dateEl); } const participantsHeader = document.createElement('h2'); participantsHeader.style.fontSize = '18px'; participantsHeader.style.fontWeight = 'bold'; participantsHeader.style.color = '#003366'; participantsHeader.style.marginTop = '1.5rem'; participantsHeader.style.marginBottom = '0.5rem'; participantsHeader.textContent = 'Participantes da Discussão'; pdfContent.appendChild(participantsHeader); const participantsTable = document.createElement('table'); participantsTable.style.width = '100%'; participantsTable.style.borderCollapse = 'collapse'; let participantsHtml = '<thead><tr style="background-color: #f3f4f6;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Nome Completo</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Função/Cargo</th></tr></thead><tbody>'; document.querySelectorAll('#participants-tbody tr').forEach(row => { const cells = row.querySelectorAll('input'); if (cells[0].value || cells[1].value) { participantsHtml += `<tr><td style="border: 1px solid #ddd; padding: 8px;">${cells[0].value}</td><td style="border: 1px solid #ddd; padding: 8px;">${cells[1].value}</td></tr>`; } }); participantsHtml += '</tbody>'; participantsTable.innerHTML = participantsHtml; pdfContent.appendChild(participantsTable); const createPdfSection = (titleText, contentHtml) => { const sectionDiv = document.createElement('div'); const header = document.createElement('h2'); header.style.fontSize = '18px'; header.style.fontWeight = 'bold'; header.style.color = '#003366'; header.style.marginTop = '1.5rem'; header.style.marginBottom = '0.5rem'; header.style.borderTop = '1px solid #ccc'; header.style.paddingTop = '1rem'; header.textContent = titleText; sectionDiv.appendChild(header); const contentDiv = document.createElement('div'); contentDiv.innerHTML = contentHtml; sectionDiv.appendChild(contentDiv); return sectionDiv; }; const data = getSummaryData(); const factsHtml = `<p><strong>Indicações Médicas:</strong><br>${data.fatosMedicos.replace(/\n/g, '<br>')}</p><p><strong>Preferências do Paciente:</strong><br>${data.fatosPaciente.replace(/\n/g, '<br>')}</p><p><strong>Evidência Científica:</strong><br>${data.fatosEvidencia.replace(/\n/g, '<br>')}</p><p><strong>Características Contextuais:</strong><br>${data.fatosContexto.replace(/\n/g, '<br>')}</p>`; pdfContent.appendChild(createPdfSection('Fatos Identificados', factsHtml)); const principlesHtml = `<p><strong>Princípios Selecionados:</strong> ${data.selectedPrinciples}</p><p><strong>Justificativa:</strong><br>${data.principiosJustificativa.replace(/\n/g, '<br>')}</p>`; pdfContent.appendChild(createPdfSection('Princípios Éticos Relevantes', principlesHtml)); pdfContent.appendChild(createPdfSection('Opções Exploradas', data.optionsText)); const actionHtml = `<div>${data.recommendedActionsText}</div><p style="font-size: 1.125rem; font-weight: 600; margin-top: 1rem;">Plano de Implementação:</p>${data.implementationPlansText || '<p>Nenhum plano de implementação adicionado.</p>'}<p style="font-size: 1.125rem; font-weight: 600; margin-top: 1rem;">Plano de Avaliação:</p>${evaluationPlanTbody.rows.length > 0 ? data.evaluationPlanText.replace(/class="[^"]*"/g, '') : '<p>Nenhuma etapa de avaliação adicionada.</p>'}`; pdfContent.appendChild(createPdfSection('Ação Decidida e Planejamento', actionHtml)); const opt = { margin: 0.5, filename: 'Analise_Etica_IDEA.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas:  { scale: 2, useCORS: true }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' } }; html2pdf().from(pdfContent).set(opt).save(); }); }
+            if(generatePdfBtn) { 
+                generatePdfBtn.addEventListener('click', () => {
+                    generateSummary(); // Make sure the summary is up-to-date
+                    const summaryContent = document.getElementById('summary-content');
+                    const pdfExportView = document.createElement('div');
+                    pdfExportView.style.padding = '2rem';
+                    pdfExportView.style.fontFamily = 'Inter, sans-serif';
+                    
+                    const title = document.createElement('h1');
+                    title.style.fontSize = '24px'; title.style.fontWeight = 'bold'; title.style.color = '#003366'; title.style.marginBottom = '1.5rem'; title.textContent = 'Relatório de Análise Ética - Ferramenta IDEA';
+                    pdfExportView.appendChild(title);
+
+                    const discussionDate = document.getElementById('discussion-date').value;
+                    if (discussionDate) { const dateEl = document.createElement('p'); dateEl.innerHTML = `<strong>Data da Discussão:</strong> ${new Date(discussionDate).toLocaleDateString('pt-BR', {timeZone: 'UTC'})}`; pdfExportView.appendChild(dateEl); }
+
+                    const participantsHeader = document.createElement('h2');
+                    participantsHeader.style.fontSize = '18px'; participantsHeader.style.fontWeight = 'bold'; participantsHeader.style.color = '#003366'; participantsHeader.style.marginTop = '1.5rem'; participantsHeader.style.marginBottom = '0.5rem'; participantsHeader.textContent = 'Participantes da Discussão';
+                    pdfExportView.appendChild(participantsHeader);
+                    
+                    const participantsTable = document.createElement('table');
+                    participantsTable.style.width = '100%'; participantsTable.style.borderCollapse = 'collapse';
+                    let participantsHtml = '<thead><tr style="background-color: #f3f4f6;"><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Nome Completo</th><th style="border: 1px solid #ddd; padding: 8px; text-align: left;">Função/Cargo</th></tr></thead><tbody>';
+                    document.querySelectorAll('#participants-tbody tr').forEach(row => { const cells = row.querySelectorAll('input'); if (cells[0].value || cells[1].value) { participantsHtml += `<tr><td style="border: 1px solid #ddd; padding: 8px;">${cells[0].value}</td><td style="border: 1px solid #ddd; padding: 8px;">${cells[1].value}</td></tr>`; } });
+                    participantsHtml += '</tbody>';
+                    participantsTable.innerHTML = participantsHtml;
+                    pdfExportView.appendChild(participantsTable);
+
+                    pdfExportView.appendChild(summaryContent.cloneNode(true));
+
+                    const opt = { margin: 0.5, filename: 'Analise_Etica_IDEA.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas:  { scale: 2, useCORS: true }, jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }, enableLinks: true };
+                    
+                    html2pdf().from(pdfExportView).set(opt).save();
+                }); 
+            }
             if(copySummaryBtn) { copySummaryBtn.addEventListener('click', () => { const summaryEl = document.getElementById('summary-content'); const tempInput = document.createElement('textarea'); tempInput.style.position = 'absolute'; tempInput.style.left = '-9999px'; tempInput.value = summaryEl.innerText; document.body.appendChild(tempInput); tempInput.select(); try { document.execCommand('copy'); alert('Resumo copiado para a área de transferência!'); } catch (err) { console.error('Falha ao copiar: ', err); alert('Não foi possível copiar o texto.'); } document.body.removeChild(tempInput); }); }
 
             // Initial state calls
+            createParticipantRow();
             if (implementationPlansContainer && implementationPlansContainer.children.length === 0) { implementationPlansContainer.appendChild(createImplementationPlanBlock(planCount++)); }
             if (evaluationPlanTbody && evaluationPlanTbody.children.length === 0) { createEvaluationRow(); }
             
             updateWizard();
         }
 
-        // 5. Set initial tab
-        switchTab('fundamentos');
+        // --- Main Control Function ---
+        function switchTab(tabId) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+
+            tabContents.forEach(content => content.classList.add('hidden'));
+            tabButtons.forEach(button => {
+                button.classList.remove('active');
+                const iconWrapper = button.querySelector('.icon-wrapper');
+                if (iconWrapper) {
+                    iconWrapper.classList.remove('text-accent');
+                }
+            });
+            
+            const activeContent = document.getElementById(tabId);
+            if(activeContent) activeContent.classList.remove('hidden');
+
+            const activeButton = document.querySelector(`[data-tab="${tabId}"]`);
+            if(activeButton) {
+                activeButton.classList.add('active');
+                const activeIconWrapper = activeButton.querySelector('.icon-wrapper');
+                if(activeIconWrapper) {
+                    activeIconWrapper.classList.add('text-accent');
+                }
+            }
+        }
+        
+        // --- Start the application ---
+        init();
+
     });
     </script>
 </body>
